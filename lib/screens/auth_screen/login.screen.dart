@@ -4,7 +4,10 @@ import 'package:emart/common_widgets/customTextField.widget.dart';
 import 'package:emart/common_widgets/ourButton.widget.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/list.dart';
+import 'package:emart/screens/auth_screen/signup.screen.dart';
+import 'package:emart/screens/home_screen/home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -44,7 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 5.heightBox,
                 ourButton(
                         color: primaryColor,
-                        onPress: () {},
+                        onPress: () {
+                          Get.to(() => const Home());
+                        },
                         title: login,
                         textColor: whiteColor)
                     .box
@@ -54,8 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 createNewAccount.text.color(fontGrey).make(),
                 5.heightBox,
                 ourButton(
-                        color: lightGolden,
-                        onPress: () {},
+                        color: lightPrimary,
+                         onPress: () {
+                          Get.to(() => const SignupScreen());
+                        },
                         title: signup,
                         textColor: primaryColor)
                     .box
@@ -66,8 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                         3,
-                        (index) => Padding(
-                            padding: EdgeInsets.only(left: 3),
+                        (index) => Container(
+                            margin: const EdgeInsets.only(left: 3),
                             child: CircleAvatar(
                               backgroundColor: lightGrey,
                               radius: 25,
