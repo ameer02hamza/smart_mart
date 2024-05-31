@@ -16,15 +16,16 @@ class CategoryScreen extends StatelessWidget {
       appBar: AppBar(
         title: categories.text.fontFamily(bold).white.make(),
         centerTitle: true,
-         automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
       ),
       body: Container(
+        padding: const EdgeInsets.all(8),
         child: GridView.builder(
             itemCount: 9,
             shrinkWrap: true,
             // physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+                crossAxisCount: 2,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
                 mainAxisExtent: 200),
@@ -42,6 +43,8 @@ class CategoryScreen extends StatelessWidget {
                   categoriesList[index]
                       .text
                       .align(TextAlign.center)
+                      .bold
+                      .size(12)
                       .color(darkFontGrey)
                       .make(),
                 ],
