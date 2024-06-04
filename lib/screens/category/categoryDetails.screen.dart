@@ -57,7 +57,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                             crossAxisCount: 2,
                             crossAxisSpacing: 8,
                             mainAxisSpacing: 8,
-                            mainAxisExtent: 220),
+                            mainAxisExtent: 300),
                     itemBuilder: (context, builder) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,10 +65,10 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                           Image.asset(
                             imgP5,
                             width: 200,
-                            // height: 150,
+                            height: 200,
                             fit: BoxFit.cover,
                           ),
-                          // const Spacer(),
+                          const Spacer(),
                           "Ladies Bag"
                               .text
                               .fontFamily(semibold)

@@ -19,6 +19,7 @@ const loginWith = "Login with";
 const privacyPolicy = "Privacy Policy";
 const termsAndConditions = "Terms and Conditions";
 const alreadyHaveAnAccount = "Already have an account?";
+const logout = "Logout";
 //Home Screen
 const home = "Home",
     categories = "Categories",
@@ -50,3 +51,11 @@ const womenClothing = "Women's Clothing",
     cosmetics = "Cosmatics",
     cellPhones = "Cell Phones",
     furniture = "Furniture";
+
+//Item categories
+const video = "Video",
+    reviews = "Reviews",
+    sellerPolicy = "Seller",
+    returnPolicy = "Return  Policy",
+    supportPolicy = "Support Policy",
+    productsYouMayLike = "Products you may like";
