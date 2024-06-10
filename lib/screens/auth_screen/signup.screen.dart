@@ -2,8 +2,8 @@ import 'package:emart/common_widgets/applogo.widget.dart';
 import 'package:emart/common_widgets/bg.widget.dart';
 import 'package:emart/common_widgets/customTextField.widget.dart';
 import 'package:emart/common_widgets/ourButton.widget.dart';
+import 'package:emart/consts/auth.controller.dart';
 import 'package:emart/consts/colors.dart';
-import 'package:emart/consts/list.dart';
 import 'package:emart/consts/strings.dart';
 import 'package:emart/consts/styles.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +19,28 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   bool isAgreed = true;
+  var controller = Get.put(AuthController());
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController reTypePasswordController = TextEditingController();
+  signUpMethod() async {
+    try {
+      if (nameController.text.isNotEmpty ||
+          emailController.text.isNotEmpty ||
+          passwordController.text.isNotEmpty ||
+          reTypePasswordController.text.isNotEmpty) {
+        await controller.signupMethod(
+            context: context,
+            name: nameController.text.text,
+            email: emailController.text,
+            password: passwordController.text);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return bgWidget(
@@ -32,28 +54,33 @@ class _SignupScreenState extends State<SignupScreen> {
             10.heightBox,
             "Join $appname".text.fontFamily(bold).white.size(18).make(),
             10.heightBox,
-            Column(
+            Form(
+                    child: Column(
               children: [
                 customTextField(
                   title: name,
                   hint: nameHint,
+                  controller: nameController,
                 ),
                 customTextField(
                   title: email,
                   hint: emailHint,
+                  controller: emailController,
                 ),
                 customTextField(
                   title: password,
                   hint: passwordHint,
+                  controller: passwordController,
                 ),
                 customTextField(
                   title: confirmPassword,
                   hint: confirmPasswordHint,
+                  controller: reTypePasswordController,
                 ),
                 5.heightBox,
                 ourButton(
-                        color:isAgreed? primaryColor:fontGrey,
-                        onPress: () {},
+                        color: isAgreed ? primaryColor : fontGrey,
+                        onPress: isAgreed ? signUpMethod : null,
                         title: signup,
                         textColor: whiteColor)
                     .box
@@ -114,7 +141,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   Get.back();
                 })
               ],
-            )
+            ))
                 .box
                 .white
                 .rounded
