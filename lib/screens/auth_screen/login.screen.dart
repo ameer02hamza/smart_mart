@@ -1,9 +1,10 @@
 import 'package:emart/common_widgets/applogo.widget.dart';
 import 'package:emart/common_widgets/bg.widget.dart';
-import 'package:emart/common_widgets/customTextField.widget.dart';
+import 'package:emart/common_widgets/authTextField.widget.dart';
 import 'package:emart/common_widgets/ourButton.widget.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/list.dart';
+import 'package:emart/controllers/auth.controller.dart';
 import 'package:emart/screens/auth_screen/signup.screen.dart';
 import 'package:emart/screens/home_screen/home.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,33 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  bool isLoading = false;
+  var auth = Get.put(AuthController());
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  loginUser() async {
+    setState(() {
+      isLoading = true;
+    });
+    if (formkey.currentState!.validate()) {
+      await auth
+          .loginMethod(
+              email: emailController.text,
+              password: passwordController.text,
+              context: context)
+          .then((value) {
+        print("%c value $value");
+        if (value != null) {
+          Get.offAll(() => const Home());
+        }
+      });
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return bgWidget(
@@ -30,61 +58,69 @@ class _LoginScreenState extends State<LoginScreen> {
             10.heightBox,
             "Login into $appname".text.fontFamily(bold).white.size(18).make(),
             10.heightBox,
-            Column(
-              children: [
-                customTextField(
-                  title: "Email",
-                  hint: "Enter your email",
-                ),
-                customTextField(
-                  title: "Password",
-                  hint: "***********",
-                ),
-                Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                        onPressed: () {}, child: forgotPassword.text.make())),
-                5.heightBox,
-                ourButton(
-                        color: primaryColor,
-                        onPress: () {
-                          Get.to(() => const Home());
-                        },
-                        title: login,
-                        textColor: whiteColor)
-                    .box
-                    .width(context.screenWidth - 70)
-                    .make(),
-                5.heightBox,
-                createNewAccount.text.color(fontGrey).make(),
-                5.heightBox,
-                ourButton(
-                        color: lightPrimary,
-                         onPress: () {
-                          Get.to(() => const SignupScreen());
-                        },
-                        title: signup,
-                        textColor: primaryColor)
-                    .box
-                    .width(context.screenWidth - 70)
-                    .make(),
-                5.heightBox,
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                        3,
-                        (index) => Container(
-                            margin: const EdgeInsets.only(left: 3),
-                            child: CircleAvatar(
-                              backgroundColor: lightGrey,
-                              radius: 25,
-                              child: Image.asset(
-                                socialIcons[index],
-                                width: 30,
-                              ),
-                            ))))
-              ],
-            )
+            Form(
+                    key: formkey,
+                    child: Column(
+                      children: [
+                        authTextField(
+                          title: "Email",
+                          hint: "Enter your email",
+                          controller: emailController,
+                        ),
+                        authTextField(
+                          title: "Password",
+                          hint: "***********",
+                          controller: passwordController,
+                        ),
+                        Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                                onPressed: () {},
+                                child: forgotPassword.text.make())),
+                        5.heightBox,
+                        isLoading
+                            ? const CircularProgressIndicator(
+                                semanticsLabel:
+                                    String.fromEnvironment("Loading..."),
+                                backgroundColor: primaryColor)
+                            : ourButton(
+                                    color: primaryColor,
+                                    onPress: loginUser,
+                                    title: login,
+                                    textColor: whiteColor)
+                                .box
+                                .width(context.screenWidth - 70)
+                                .make(),
+                        5.heightBox,
+                        createNewAccount.text.color(fontGrey).make(),
+                        5.heightBox,
+                        ourButton(
+                                color: lightPrimary,
+                                onPress: () {
+                                  Get.to(() => const SignupScreen());
+                                },
+                                title: signup,
+                                textColor: primaryColor)
+                            .box
+                            .width(context.screenWidth - 70)
+                            .make(),
+                        5.heightBox,
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                                3,
+                                (index) => Container(
+                                    margin: const EdgeInsets.only(left: 3),
+                                    child: CircleAvatar(
+                                      backgroundColor: lightGrey,
+                                      radius: 25,
+                                      child: Image.asset(
+                                        socialIcons[index],
+                                        width: 30,
+                                      ),
+                                    ))))
+                      ],
+                    ))
                 .box
                 .white
                 .rounded

@@ -1,10 +1,24 @@
 import 'package:emart/common_widgets/bg.widget.dart';
-import 'package:emart/consts/colors.dart';
-import 'package:emart/consts/consts.dart';
+import 'package:emart/controllers/auth.controller.dart';
+import 'package:emart/screens/auth_screen/login.screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ProfileScreen extends StatelessWidget {
+import '../../consts/consts.dart';
+
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  var controller = Get.put(AuthController());
+  logoutUser() async {
+    await controller.logoutMethod(context: context);
+    Get.offAll(() => const LoginScreen());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
         child: Scaffold(
       body: SafeArea(
           child: Container(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(
           children: [
             const Align(
@@ -50,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
                         side: const BorderSide(color: whiteColor),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4))),
-                    onPressed: () {},
+                    onPressed: logoutUser,
                     child:
                         logout.text.fontFamily(semibold).size(7).white.make())
               ],
