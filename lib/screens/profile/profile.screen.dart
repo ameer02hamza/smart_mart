@@ -1,6 +1,7 @@
 import 'package:emart/common_widgets/bg.widget.dart';
 import 'package:emart/controllers/auth.controller.dart';
 import 'package:emart/screens/auth_screen/login.screen.dart';
+import 'package:emart/screens/profile/editProfile.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,7 +38,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: whiteColor,
               ),
             ).onTap(
-              () {},
+              () {
+                Get.to(() => const EditProfileScreen());
+              },
             ),
             Row(
               children: [
