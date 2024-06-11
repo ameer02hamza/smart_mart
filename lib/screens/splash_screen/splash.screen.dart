@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   changeScreen() async {
     await Future.delayed(const Duration(seconds: 3));
     firebaseAuth.authStateChanges().listen((User? user) {
-      if (user == null && mounted) {
+      if (user == null) {
         Get.offAll(() => const LoginScreen());
       } else {
         Get.offAll(() => const Home());

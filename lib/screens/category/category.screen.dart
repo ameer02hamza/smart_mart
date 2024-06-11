@@ -16,7 +16,7 @@ class CategoryScreen extends StatelessWidget {
       appBar: AppBar(
         title: categories.text.fontFamily(bold).white.make(),
         centerTitle: true,
-         automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         child: GridView.builder(
@@ -27,21 +27,22 @@ class CategoryScreen extends StatelessWidget {
                 crossAxisCount: 3,
                 crossAxisSpacing: 8,
                 mainAxisSpacing: 8,
-                mainAxisExtent: 200),
+                mainAxisExtent: 170),
             itemBuilder: (context, index) {
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
                     categoriesImages[index],
-                    height: 130,
+                    height: 70,
                     width: 200,
                     fit: BoxFit.cover,
                   ),
-                  10.heightBox,
+                  // 10.heightBox,
                   categoriesList[index]
                       .text
                       .align(TextAlign.center)
+                      // .siz
                       .color(darkFontGrey)
                       .make(),
                 ],
@@ -52,7 +53,7 @@ class CategoryScreen extends StatelessWidget {
                   .rounded
                   .clip(Clip.antiAlias)
                   .outerShadowSm
-                  .padding(const EdgeInsets.all(8))
+                  .padding(const EdgeInsets.all(15))
                   .make()
                   .onTap(() {
                 Get.to(

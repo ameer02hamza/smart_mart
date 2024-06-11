@@ -13,6 +13,7 @@ Widget authTextField(
       title!.text.color(primaryColor).fontFamily(semibold).size(16).make(),
       5.heightBox,
       TextFormField(
+        maxLength: 45,
         obscureText: title.toLowerCase().contains("password"),
         controller: controller,
         validator: (value) {
@@ -27,6 +28,7 @@ Widget authTextField(
           return null;
         },
         decoration: InputDecoration(
+            counterText: "",
             hintStyle:
                 const TextStyle(color: textfieldGrey, fontFamily: semibold),
             hintText: hint!,

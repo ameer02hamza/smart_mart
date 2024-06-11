@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -58,7 +57,10 @@ class AuthController extends GetxController {
         "password": password,
         "email": email,
         "profileUrl": "",
-        "id": currentUser!.uid
+        "id": currentUser!.uid,
+        "cartCount": "00",
+        "orderCount": "00",
+        "wishListCount": "00",
       });
     } catch (e) {
       print("error in storeUserData: $e");

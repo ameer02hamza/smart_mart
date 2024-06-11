@@ -82,7 +82,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ? const CircularProgressIndicator(
                                 semanticsLabel:
                                     String.fromEnvironment("Loading..."),
-                                backgroundColor: primaryColor)
+                              valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+                                )
                             : ourButton(
                                     color: primaryColor,
                                     onPress: loginUser,

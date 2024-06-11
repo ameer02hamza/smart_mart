@@ -8,9 +8,11 @@ Widget customTextField({String? title, String? hint, controller, isPass}) {
       title!.text.color(primaryColor).fontFamily(semibold).size(16).make(),
       5.heightBox,
       TextFormField(
+        maxLength: 40,
         controller: controller,
         obscureText: isPass,
         decoration: InputDecoration(
+            counterText: "",
             hintStyle:
                 const TextStyle(color: textfieldGrey, fontFamily: semibold),
             hintText: hint!,
@@ -21,6 +23,12 @@ Widget customTextField({String? title, String? hint, controller, isPass}) {
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: primaryColor),
             )),
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Please enter $title.";
+          }
+          return null;
+        },
       ),
       5.heightBox,
     ],
