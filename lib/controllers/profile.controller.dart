@@ -49,16 +49,19 @@ class ProfileController extends GetxController {
   updateProfile(context) async {
     try {
       isLoading(true);
-      await uploadProfileImage();
+      if (profileImgPath.value.isNotEmpty) {
+        await uploadProfileImage();
+      }
       await firebaseStore
           .collection(usersCollections)
           .doc(currentUser!.uid)
           .update({
         "name": nameController.text,
-        "password": pswdController.text,
         "profileUrl": profileImageLink,
       });
       isLoading(false);
+      oldPswdController.text = "";
+      pswdController.text = "";
       VxToast.show(
         context,
         msg: "Profile Updated successfully",
@@ -68,6 +71,8 @@ class ProfileController extends GetxController {
         showTime: 5000,
       );
     } catch (e) {
+      oldPswdController.text = "";
+      pswdController.text = "";
       isLoading(false);
       VxToast.show(
         context,
@@ -81,12 +86,24 @@ class ProfileController extends GetxController {
     }
   }
 
-  changePassword({email, password, newPassword}) async {
-    final cred = EmailAuthProvider.credential(email: email, password: password);
+  changePassword({email, oldPswd, newPassword, context}) async {
+    isLoading(true);
+    final cred = EmailAuthProvider.credential(email: email, password: oldPswd);
     await currentUser!.reauthenticateWithCredential(cred).then((value) async {
-      currentUser!.updatePassword(newPassword);
+      print("%c reauthenticated $value");
+      await currentUser!.updatePassword(newPassword);
+      await updateProfile(context);
+      await firebaseAuth.signOut();
     }).catchError((error) {
-      print(" %c error: $error");
+      print(" %c error: ${error.message}");
+      VxToast.show(
+        context,
+        msg: error.message,
+        position: VxToastPosition.top,
+        bgColor: Vx.red800,
+        textColor: whiteColor,
+        showTime: 5000,
+      );
     });
   }
 }

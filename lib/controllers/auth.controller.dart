@@ -48,13 +48,13 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<dynamic> storeUserData({name, password, email}) async {
+  Future<dynamic> storeUserData({name,email}) async {
     try {
       DocumentReference store =
           firebaseStore.collection(usersCollections).doc(currentUser!.uid);
       store.set({
         "name": name,
-        "password": password,
+        // "password": password,
         "email": email,
         "profileUrl": "",
         "id": currentUser!.uid,

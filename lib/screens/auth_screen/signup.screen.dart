@@ -39,9 +39,10 @@ class _SignupScreenState extends State<SignupScreen> {
             password: passwordController.text);
         if (userData != null) {
           await controller.storeUserData(
-              name: nameController.text,
-              email: emailController.text,
-              password: passwordController.text);
+            name: nameController.text,
+            email: emailController.text,
+            // password: passwordController.text
+          );
           passwordController.text = "";
           reTypePasswordController.text = "";
           Get.back();
@@ -60,8 +61,8 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     return bgWidget(
         child: Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Center(
+      body: SingleChildScrollView(
+          child: Center(
         child: Column(
           children: [
             (context.screenHeight * 0.07).heightBox,
@@ -170,7 +171,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 .make()
           ],
         ),
-      ),
+      )),
     ));
   }
 }

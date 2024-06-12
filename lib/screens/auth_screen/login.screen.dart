@@ -1,6 +1,7 @@
 import 'package:emart/common_widgets/applogo.widget.dart';
 import 'package:emart/common_widgets/bg.widget.dart';
 import 'package:emart/common_widgets/authTextField.widget.dart';
+import 'package:emart/common_widgets/loading.widget.dart';
 import 'package:emart/common_widgets/ourButton.widget.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/list.dart';
@@ -49,8 +50,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return bgWidget(
         child: Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Center(
+            body: SingleChildScrollView(
+      child: Center(
         child: Column(
           children: [
             (context.screenHeight * 0.07).heightBox,
@@ -79,11 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: forgotPassword.text.make())),
                         5.heightBox,
                         isLoading
-                            ? const CircularProgressIndicator(
-                                semanticsLabel:
-                                    String.fromEnvironment("Loading..."),
-                              valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
-                                )
+                            ? loadingIndicator()
                             : ourButton(
                                     color: primaryColor,
                                     onPress: loginUser,
@@ -132,6 +129,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
-    ));
+    )));
   }
 }

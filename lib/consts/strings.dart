@@ -43,14 +43,14 @@ const searchAnyThing = "Search anything...",
 const featuredProducts = "Featured Products";
 
 //Categories
-const womenClothing = "Women's Clothing",
-    menClothingFashion = "Men's Clothing",
-    compAccessories = "Computer Accessories",
+const womenClothing = "Women Dress",
+    menClothingFashion = "Men Clothing & Fashion",
+    compAccessories = "Computer & Accessories",
     autoMobile = "Automobile",
-    kidToys = "Kids Toys",
+    kidToys = "Kids & Toys",
     sports = "Sports",
-    cosmetics = "Cosmatics",
-    cellPhones = "Cell Phones",
+    jewelery = "Jewelery",
+    cellPhones = "Cellphone & Tab",
     furniture = "Furniture";
 
 //Item categories

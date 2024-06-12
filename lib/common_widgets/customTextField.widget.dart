@@ -27,6 +27,9 @@ Widget customTextField({String? title, String? hint, controller, isPass}) {
           if (value!.isEmpty) {
             return "Please enter $title.";
           }
+          if(isPass && value.length < 6){
+            return "Password must be at least 6 characters long.";
+          }
           return null;
         },
       ),

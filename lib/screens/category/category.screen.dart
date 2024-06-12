@@ -1,7 +1,7 @@
 import 'package:emart/common_widgets/bg.widget.dart';
-import 'package:emart/consts/colors.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/list.dart';
+import 'package:emart/controllers/product.controller.dart';
 import 'package:emart/screens/category/categoryDetails.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,6 +11,7 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProductController());
     return bgWidget(
         child: Scaffold(
       appBar: AppBar(
@@ -56,6 +57,8 @@ class CategoryScreen extends StatelessWidget {
                   .padding(const EdgeInsets.all(15))
                   .make()
                   .onTap(() {
+                controller.subCat.clear();
+                controller.getSubCategories(categoriesList[index]);
                 Get.to(
                     () => CategoryDetailsScreen(title: categoriesList[index]));
               });

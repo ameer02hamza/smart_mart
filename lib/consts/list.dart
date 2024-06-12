@@ -19,7 +19,7 @@ const categoriesList = [
   kidToys,
   sports,
   cellPhones,
-  cosmetics,
+  jewelery,
   furniture
 ];
 const categoriesImages = [

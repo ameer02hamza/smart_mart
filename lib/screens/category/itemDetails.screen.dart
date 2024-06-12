@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 class ItemDetailsScreen extends StatefulWidget {
   String title;
-  ItemDetailsScreen({super.key, required this.title});
+  dynamic itemData;
+  ItemDetailsScreen({super.key, required this.title, required this.itemData});
 
   @override
   State<ItemDetailsScreen> createState() => _ItemDetailsScreenState();
@@ -39,7 +40,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
       body: Column(children: [
         Expanded(
             child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,10 +50,11 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                         height: 300,
                         autoPlay: true,
                         enlargeCenterPage: true,
-                        itemCount: slidersList.length,
+                        viewportFraction: 1.0,
+                        itemCount: widget.itemData['p_imgs'].length,
                         itemBuilder: (context, index) {
-                          return Image.asset(
-                            slidersList[index],
+                          return Image.network(
+                            widget.itemData['p_imgs'][index],
                             fit: BoxFit.fill,
                             width: double.infinity,
                           )
@@ -71,16 +73,23 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                           .make(),
                       10.heightBox,
                       VxRating(
+                        isSelectable: false,
                         onRatingUpdate: (value) {},
                         normalColor: textfieldGrey,
                         selectionColor: golden,
                         // maxRating: 5,
-                        count: 5,
+                        count: int.parse(widget.itemData['p_rating']),
                         size: 25,
-                        stepInt: true,
+                        // stepInt: true,
                       ),
                       10.heightBox,
-                      "\$30,000".text.size(20).bold.color(primaryColor).make(),
+                      "${widget.itemData["p_price"]}"
+                          .numCurrencyWithLocale(locale: "en_US")
+                          .text
+                          .size(20)
+                          .bold
+                          .color(primaryColor)
+                          .make(),
                       20.heightBox,
                       Row(
                         children: [
@@ -97,7 +106,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                     .color(darkFontGrey)
                                     .make(),
                                 10.heightBox,
-                                "In House Brands"
+                                "${widget.itemData["p_seller"]}"
                                     .text
                                     .size(16)
                                     .semiBold
@@ -160,6 +169,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                     .make(),
                               ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   IconButton(
                                     onPressed: () {},
@@ -175,7 +185,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                     onPressed: () {},
                                     icon: Icon(Icons.add),
                                   ),
-                                  10.widthBox,
+                                  // .widthBox,
                                   "(0 available)"
                                       .text
                                       .size(16)

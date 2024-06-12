@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart/common_widgets/bg.widget.dart';
+import 'package:emart/common_widgets/loading.widget.dart';
 import 'package:emart/consts/list.dart';
 import 'package:emart/controllers/auth.controller.dart';
 import 'package:emart/controllers/profile.controller.dart';
 import 'package:emart/screens/auth_screen/login.screen.dart';
 import 'package:emart/screens/profile/components/detailsButtonCard.comp.dart';
 import 'package:emart/screens/profile/editProfile.screen.dart';
-import 'package:emart/services/firebaseServices/firestore.service.dart';
+import 'package:emart/services/firebase/firestore.service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -35,11 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 stream: FirestoreServices.getUser(currentUser!.uid),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (!snapshot.hasData) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
-                      ),
-                    );
+                    return Center(child: loadingIndicator());
                   } else {
                     var data = snapshot.data!.docs.first;
                     return SafeArea(
@@ -79,13 +76,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     .make()
                                 : Image.network(
                                     data["profileUrl"],
-                                    width: 50,
+                                    width: 70,
                                     fit: BoxFit.cover,
                                   )
                                     .box
                                     .roundedFull
-                                    .margin(const EdgeInsets.only(
-                                        right: 5, left: 5))
+                                    .margin(const EdgeInsets.only(left: 5))
                                     .clip(Clip.antiAlias)
                                     .make(),
                             Expanded(
