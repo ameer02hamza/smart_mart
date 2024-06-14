@@ -8,3 +8,5 @@ const Color lightGrey = Color.fromRGBO(239, 239, 239, 1);
 const Color primaryColor = Color.fromRGBO(230, 46, 4, 1);
 const Color golden = Color.fromRGBO(255, 168, 0, 1);
 const Color lightPrimary = Color(0xffFEEAD1);
+const Color successColor = Color(0xFF008404);
+const Color errorColor = Color.fromARGB(255, 255, 0, 0);

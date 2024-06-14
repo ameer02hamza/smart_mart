@@ -66,3 +66,18 @@ const whishList = "My WishList", order = "My Order", messages = "Messages";
 const myCart = "in your cart",
     myWishList = "in your wishlist",
     myOrders = "in your orders";
+
+//Dialog Box content
+const sureText = "Are you sure?", exitMessage = "Do you want to exit the app?";
+
+//Cart Screen
+const addedCart = "Added to Cart",
+    addedWishList = "Added to Wishlist",
+    removeCart = "Removed from Cart",
+    removeWishList = "Removed from Wishlist",
+    totalPrice = "Total Price",
+    proceedToCheckout = "Proceed to Checkout",
+    emptyCart = "Your Cart is Empty",
+    emptyWishList = "Your Wishlist is Empty",
+    continueShopping = "Continue Shopping",
+    noItemsWishList = "No items in your wishlist";
