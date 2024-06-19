@@ -16,14 +16,28 @@ class FirestoreServices {
         .snapshots();
   }
 
-    static getCartData(userId) {
+  static getCartData(userId) {
     return firebaseStore
         .collection(cartCollection)
-        .where("added_by", isEqualTo:userId)
+        .where("added_by", isEqualTo: userId)
         .snapshots();
   }
-    static deleteCartDoc(docId) {
+
+  static deleteCartDoc(docId) {
+    return firebaseStore.collection(cartCollection).doc(docId).delete();
+  }
+
+  static getAllOrders() {
     return firebaseStore
-        .collection(cartCollection).doc(docId).delete();
+        .collection(orderCollection)
+        .where('order_by', isEqualTo: currentUser!.uid)
+        .snapshots();
+  }
+
+  static getWishList() {
+    return firebaseStore
+        .collection(productCollections)
+        .where('p_wishlist', arrayContains: currentUser!.uid)
+        .snapshots();
   }
 }

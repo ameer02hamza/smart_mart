@@ -60,6 +60,14 @@ class _HomeState extends State<Home> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    controller.getUserDetails();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PopScope(
         canPop: false,

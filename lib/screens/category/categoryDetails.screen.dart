@@ -17,6 +17,7 @@ class CategoryDetailsScreen extends StatefulWidget {
 }
 
 class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
+  var controller = Get.find<ProductController>();
   @override
   Widget build(BuildContext context) {
     return bgWidget(
@@ -49,9 +50,8 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: List.generate(
-                              Get.find<ProductController>().subCat.length,
-                              (index) => Get.find<ProductController>()
-                                  .subCat[index]
+                              controller.subCat.length,
+                              (index) => controller.subCat[index]
                                   .toString()
                                   .text
                                   .size(12)
@@ -113,7 +113,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                                 .padding(const EdgeInsets.all(8))
                                 .make()
                                 .onTap(() {
-                              print("heelo");
+                              controller.checkIf(data[index]);
                               Get.to(() => ItemDetailsScreen(
                                   title: data[index]['p_name'].toUpperCase(),
                                   itemData: data[index]));

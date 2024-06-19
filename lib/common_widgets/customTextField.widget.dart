@@ -5,7 +5,14 @@ Widget customTextField({String? title, String? hint, controller, isPass}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      title!.text.color(primaryColor).fontFamily(semibold).size(16).make(),
+      title!
+          .toString()
+          .capitalized
+          .text
+          .color(primaryColor)
+          .fontFamily(semibold)
+          .size(16)
+          .make(),
       5.heightBox,
       TextFormField(
         maxLength: 40,
@@ -27,7 +34,7 @@ Widget customTextField({String? title, String? hint, controller, isPass}) {
           if (value!.isEmpty) {
             return "Please enter $title.";
           }
-          if(isPass && value.length < 6){
+          if (isPass && value.length < 6) {
             return "Password must be at least 6 characters long.";
           }
           return null;

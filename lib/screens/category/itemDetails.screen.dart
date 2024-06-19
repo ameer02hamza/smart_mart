@@ -39,13 +39,22 @@ class ItemDetailsScreen extends StatelessWidget {
                   color: darkFontGrey,
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite_outline,
-                  color: darkFontGrey,
-                ),
-              ),
+              Obx(() => IconButton(
+                    onPressed: () {
+                      if (controller.isFav.value) {
+                        controller.removeFromWishList(itemData.id);
+                      } else {
+                        controller.addToWishList(itemData.id);
+                      }
+                    },
+                    icon: Icon(
+                      controller.isFav.value
+                          ? Icons.favorite
+                          : Icons.favorite_outline,
+                      color:
+                          controller.isFav.value ? primaryColor : darkFontGrey,
+                    ),
+                  )),
             ],
           ),
           body: Column(children: [
@@ -144,9 +153,10 @@ class ItemDetailsScreen extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       SizedBox(
-                                        width: 100,
+                                        width: 75,
                                         child: "Color"
                                             .text
                                             .size(16)
@@ -188,16 +198,15 @@ class ItemDetailsScreen extends StatelessWidget {
                                   ).box.padding(const EdgeInsets.all(8)).make(),
                                   10.heightBox,
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      SizedBox(
-                                        width: 100,
-                                        child: "Pieces"
-                                            .text
-                                            .size(16)
-                                            .semiBold
-                                            .color(textfieldGrey)
-                                            .make(),
-                                      ),
+                                      "Pieces"
+                                          .text
+                                          .size(16)
+                                          .semiBold
+                                          .color(textfieldGrey)
+                                          .make(),
+                                      10.widthBox,
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -235,11 +244,9 @@ class ItemDetailsScreen extends StatelessWidget {
                                             },
                                             icon: const Icon(Icons.add),
                                           ),
-                                          // .widthBox,
-
                                           "(${itemData["p_quantity"]} available)"
                                               .text
-                                              .size(16)
+                                              .size(14)
                                               .color(darkFontGrey)
                                               .make(),
                                         ],
@@ -355,44 +362,45 @@ class ItemDetailsScreen extends StatelessWidget {
                         ],
                       ),
                     ))),
-            SizedBox(
-              child: ourButton(
-                color: primaryColor,
-                onPress: () {
-                  if (controller.itemQuantity.value > 0) {
-                    controller.addToCart(
-                      context: context,
-                      color: itemData["p_colors"][controller.colorIndex.value],
-                      img: itemData["p_imgs"][0],
-                      price: itemData["p_price"],
-                      qty: controller.itemQuantity.value,
-                      sellerName: itemData["p_seller"],
-                      title: itemData["p_name"],
-                    );
-                    VxToast.show(context,
-                        msg: addedCart,
-                        textColor: whiteColor,
-                        bgColor: successColor,
-                        position: VxToastPosition.top,
-                        showTime: 4000);
-                    return;
-                  }
+          ]),
+          bottomNavigationBar: SizedBox(
+            child: ourButton(
+              color: primaryColor,
+              onPress: () {
+                if (controller.itemQuantity.value > 0) {
+                  controller.addToCart(
+                    context: context,
+                    color: itemData["p_colors"][controller.colorIndex.value],
+                    img: itemData["p_imgs"][0],
+                    price: controller.totalPrice.value,
+                    qty: controller.itemQuantity.value,
+                    sellerName: itemData["p_seller"],
+                    vendorId: itemData["vendor_id"],
+                    title: itemData["p_name"],
+                  );
                   VxToast.show(context,
-                      msg: "Please select quantity",
+                      msg: addedCart,
                       textColor: whiteColor,
-                      bgColor: Colors.red,
+                      bgColor: successColor,
                       position: VxToastPosition.top,
                       showTime: 4000);
-                },
-                title: "Add to Cart",
-                textColor: whiteColor,
-              )
-                  .box
-                  .width(context.screenWidth)
-                  .padding(const EdgeInsets.all(10))
-                  .make(),
+                  return;
+                }
+                VxToast.show(context,
+                    msg: "Please select quantity",
+                    textColor: whiteColor,
+                    bgColor: Colors.red,
+                    position: VxToastPosition.top,
+                    showTime: 4000);
+              },
+              title: "Add to Cart",
+              textColor: whiteColor,
             )
-          ]),
+                .box
+                .width(context.screenWidth)
+                .padding(const EdgeInsets.symmetric(horizontal: 10))
+                .make(),
+          ),
         ));
   }
 }

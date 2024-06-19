@@ -76,8 +76,18 @@ const addedCart = "Added to Cart",
     removeCart = "Removed from Cart",
     removeWishList = "Removed from Wishlist",
     totalPrice = "Total Price",
-    proceedToCheckout = "Proceed to Checkout",
+    shippingInfo = "Shipping Info",
+    proceedToShipping = "Proceed to Shipping",
     emptyCart = "Your Cart is Empty",
     emptyWishList = "Your Wishlist is Empty",
     continueShopping = "Continue Shopping",
     noItemsWishList = "No items in your wishlist";
+
+//Payment scree
+const paypal = "Paypal",
+    stripe = "Stripe",
+    cod = "Cash on Delivery",
+    placeOrder = "Place Order";
+
+//Order screen
+const emptyOrder = "No orders yet";

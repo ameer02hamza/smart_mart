@@ -30,7 +30,7 @@ Widget showDialogWidget(BuildContext context) {
               color: primaryColor,
               title: "NO",
               onPress: () {
-                Get.back();
+                Navigator.pop(context);
               },
               textColor: whiteColor,
             ).box.roundedSM.make(),

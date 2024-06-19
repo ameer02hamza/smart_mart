@@ -5,6 +5,9 @@ import 'package:emart/consts/list.dart';
 import 'package:emart/controllers/auth.controller.dart';
 import 'package:emart/controllers/profile.controller.dart';
 import 'package:emart/screens/auth_screen/login.screen.dart';
+import 'package:emart/screens/chats/chat.screem.dart';
+import 'package:emart/screens/orders/order.screen.dart';
+import 'package:emart/screens/orders/wishlist.screen.dart';
 import 'package:emart/screens/profile/components/detailsButtonCard.comp.dart';
 import 'package:emart/screens/profile/editProfile.screen.dart';
 import 'package:emart/services/firebase/firestore.service.dart';
@@ -151,6 +154,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             return ListTile(
+                              onTap: () {
+                                switch (index) {
+                                  case 0:
+                                    Get.to(() => const WishListScreen());
+                                    break;
+                                  case 1:
+                                    Get.to(() => const OrderScreen());
+                                    break;
+                                  case 2:
+                                    Get.to(() => const ChatScreen());
+                                    break;
+                                  default:
+                                }
+                              },
                               title: profileButtons[index]
                                   .text
                                   .size(12)

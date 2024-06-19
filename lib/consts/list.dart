@@ -44,3 +44,7 @@ const itemCategoryList = [
 const profileButtons = [whishList, order, messages];
 const profileCardButtons = [myCart, myWishList, myOrders];
 const profileButtonIcons = [icOrders, icOrder, icMessages];
+
+//Payment screen
+const paymentMethodsImgs = [imgPaypal, imgStripe, imgCod];
+const paymentMethods = [paypal, stripe, cod];
