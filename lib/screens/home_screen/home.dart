@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'dart:math';
-
 import 'package:emart/common_widgets/exitDialog.widget.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:emart/controllers/home.controller.dart';

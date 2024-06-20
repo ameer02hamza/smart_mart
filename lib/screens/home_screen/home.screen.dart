@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart/common_widgets/homeButtons.widget.dart';
+import 'package:emart/common_widgets/loading.widget.dart';
 import 'package:emart/consts/colors.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/list.dart';
 import 'package:emart/screens/home_screen/components/featured.button.dart';
+import 'package:emart/services/firebase/firestore.service.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -152,44 +155,71 @@ class HomeScreen extends StatelessWidget {
                             .size(18)
                             .make(),
                         10.heightBox,
-                        SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: List.generate(
-                                  6,
-                                  (index) => Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                            imgP1,
-                                            width: 150,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          10.heightBox,
-                                          "Laptop 40GB/256GB"
-                                              .text
-                                              .fontFamily(semibold)
-                                              .color(darkFontGrey)
-                                              .make(),
-                                          10.heightBox,
-                                          "\$600"
-                                              .text
-                                              .color(primaryColor)
-                                              .fontFamily(bold)
-                                              .size(16)
-                                              .make(),
-                                        ],
-                                      )
-                                          .box
-                                          .margin(const EdgeInsets.symmetric(
-                                              horizontal: 4))
-                                          .white
-                                          .roundedSM
-                                          .padding(const EdgeInsets.all(8))
-                                          .make()),
-                            )),
+                        StreamBuilder(
+                            stream: FirestoreServices.getFeaturedProducts(),
+                            builder: (context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (!snapshot.hasData) {
+                                return Center(child: loadingIndicator());
+                              } else if (snapshot.data!.docs.isEmpty) {
+                                return Center(
+                                  child: "No Products Available as of now."
+                                      .toString()
+                                      .text
+                                      .bold
+                                      .color(whiteColor)
+                                      .makeCentered(),
+                                );
+                              }
+                              var data = snapshot.data!.docs;
+                              return SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: List.generate(
+                                        data.length,
+                                        (index) => Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Image.network(
+                                                  data[index]["p_imgs"][0],
+                                                  width: 150,
+                                                  height: 130,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                10.heightBox,
+                                                "${data[index]["p_name"]}"
+                                                    .text
+                                                    .fontFamily(semibold)
+                                                    .color(darkFontGrey)
+                                                    .make(),
+                                                10.heightBox,
+                                                "${data[index]["p_price"]}"
+                                                    .numCurrencyWithLocale(
+                                                        locale: "en_US")
+                                                    .text
+                                                    .color(primaryColor)
+                                                    .fontFamily(bold)
+                                                    .size(16)
+                                                    .make(),
+                                              ],
+                                            )
+                                                .box
+                                                .margin(
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 4))
+                                                .white
+                                                .roundedSM
+                                                .padding(
+                                                    const EdgeInsets.all(8))
+                                                .make()
+                                                .onTap(() {
+                                              print("${data[index]}");
+                                            })),
+                                  ));
+                            }),
                       ],
                     ),
                   ),

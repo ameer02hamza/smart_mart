@@ -37,6 +37,7 @@ class CartController extends GetxController {
       "order_by_address": addressController.text,
       "order_by_phone": phoneController.text,
       "order_by_postalcode": postalController.text,
+      "order_by_city": cityController.text,
       "shipping_method": "Home Delivery",
       "payment_method": paymentMethods[paymentIndex.value],
       "order_placed": true,

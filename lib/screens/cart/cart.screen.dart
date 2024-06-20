@@ -5,7 +5,7 @@ import 'package:emart/consts/colors.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/firebase.const.dart';
 import 'package:emart/controllers/cart.controller.dart';
-import 'package:emart/screens/cart/shipping.screen.dart';
+import 'package:emart/screens/cart/shippingAddress.screen.dart';
 import 'package:emart/services/firebase/firestore.service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

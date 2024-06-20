@@ -2,7 +2,6 @@ import 'package:emart/common_widgets/ourButton.widget.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 Widget showDialogWidget(BuildContext context) {
   return Dialog(

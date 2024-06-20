@@ -40,4 +40,11 @@ class FirestoreServices {
         .where('p_wishlist', arrayContains: currentUser!.uid)
         .snapshots();
   }
+
+  static getFeaturedProducts() {
+    return firebaseStore
+        .collection(productCollections)
+        .where('is_featured', isEqualTo: true)
+        .snapshots();
+  }
 }

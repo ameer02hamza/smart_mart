@@ -1,5 +1,4 @@
 import 'package:emart/consts/firebase.const.dart';
-import 'package:emart/services/firebase/firestore.service.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {

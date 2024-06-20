@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 Category categoryFromJson(String str) => Category.fromJson(json.decode(str));

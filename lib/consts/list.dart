@@ -40,7 +40,7 @@ const itemCategoryList = [
   returnPolicy,
   supportPolicy
 ];
-
+//Profile screen
 const profileButtons = [whishList, order, messages];
 const profileCardButtons = [myCart, myWishList, myOrders];
 const profileButtonIcons = [icOrders, icOrder, icMessages];

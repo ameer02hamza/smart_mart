@@ -1,11 +1,9 @@
 import 'package:emart/common_widgets/loading.widget.dart';
 import 'package:emart/common_widgets/ourButton.widget.dart';
-import 'package:emart/consts/colors.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/list.dart';
 import 'package:emart/controllers/cart.controller.dart';
 import 'package:emart/screens/home_screen/home.dart';
-import 'package:emart/screens/home_screen/home.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
